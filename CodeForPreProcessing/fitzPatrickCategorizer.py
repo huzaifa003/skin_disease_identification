@@ -2,8 +2,8 @@ import pandas as pd
 import os 
 import shutil
 
-fitz17 = pd.read_csv("fitzpatrick17k.csv")
-fitzCleaned = pd.read_excel("fitzpatrick_cleaned_annoted_data.xlsx")
+fitz17 = pd.read_csv("Datasets/fitzpatrick17k.csv")
+fitzCleaned = pd.read_excel("Datasets/fitzpatrick_cleaned_annoted_data.xlsx")
 
 labels = fitz17['label'].unique()
 
