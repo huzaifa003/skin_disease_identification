@@ -1,35 +1,67 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React, { useState } from 'react';
+import PatientChat from './PatientChat';
+import DermatologistChat from './DermatologistChat';
 
-function App() {
-  const [count, setCount] = useState(0)
+function LoginForm() {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleUsernameChange = (event) => {
+    setUsername(event.target.value);
+  };
+
+  const handlePasswordChange = (event) => {
+    setPassword(event.target.value);
+  };
+
+  const handleSubmit = () => {
+    console.log(`Username: ${username}, Password: ${password}`);
+    document.getElementById('login_div').style.display = 'none';
+    if (username === 'patient' && password === 'patient') {
+      document.getElementById('patientChat').style.display = 'block';
+    }
+    else if (username === 'dermatologist' && password === 'dermatologist') {
+      document.getElementById('dermatologistChat').style.display = 'block';
+    }
+
+    else {
+      alert('Login failed');
+    }
+
+    // Add your submit logic here
+  };
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div>
+
+      <div id='login_div'>
+        <input
+          id="username"
+          type="text"
+          value={username}
+          onChange={handleUsernameChange}
+          placeholder="Username"
+        />
+        <input
+          id="password"
+          type="password"
+          value={password}
+          onChange={handlePasswordChange}
+          placeholder="Password"
+        />
+        <button onClick={handleSubmit}>Login</button>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
+
+      <div id='patientChat' style={{display: 'none'}}>
+        <PatientChat />
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+
+      <div id='dermatologistChat' style={{display: 'none'}}>
+        <DermatologistChat />
+      </div>
+
+    </div>
+  );
 }
 
-export default App
+export default LoginForm;
